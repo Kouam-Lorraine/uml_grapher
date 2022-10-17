@@ -1,24 +1,19 @@
 package fr.lernejo.umlgrapher;
 
 public class UmlGraph{
-
-    final Class nameClasse;
-
-    public UmlGraph(Class nameClasse){
-
-        this.nameClasse = nameClasse;
+    private final Class[] tabNameClasse;
+    public UmlGraph(Class... tabNameClasse){
+        this.tabNameClasse = tabNameClasse;
     }
-
     public String as(GraphType graphType){
+        String mot ="classDiagram\n" ;
+        for(Class nameClasse : tabNameClasse){
 
-        String typeClassName = "";
-
-        if(nameClasse.isInterface() == true){
-            typeClassName = "interface";
+            mot = mot + "class " +nameClasse.getSimpleName();
+            if(nameClasse.isInterface() == true){
+                mot = mot +" {\n    <<interface>>\n}\n";
+            }
         }
-
-        String mot = "classDiagram\nclass " +nameClasse.getSimpleName()+ " {\n    <<"+typeClassName+ ">>\n}\n";
-
         return mot;
     }
 }
